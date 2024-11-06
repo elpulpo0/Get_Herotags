@@ -1,20 +1,25 @@
-```
-python -m venv venv
-```
+### GET_Herotags
 
-
-```
-source venv/Scripts/activate
-```
-
+A simple API that allow you to get your needed herotags in one call.
 
 ```
-pip install --upgrade pip
-pip install -r requirements_local.txt
+http://127.0.0.1:5000/get_herotags?addresses=erdaddress111111,erdaddress222222,erdaddress333333
 ```
 
-```
-python scrap.py
-```
+Response will look like
 
-
+```json
+[
+  {
+    "address": "erdaddress111111",
+    "herotag": "address1"
+  },
+  {
+    "address": "erdaddress222222",
+    "herotag": "address2"
+  },
+  {
+    "address": "erdaddress333333",
+    "herotag": "address3",
+  }
+]

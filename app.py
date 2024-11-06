@@ -3,6 +3,7 @@ from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
 
+# Initialize Flask app
 app = Flask(__name__)
 
 # Load environment variables
@@ -14,6 +15,7 @@ try:
     client = MongoClient(MONGO_URI)
     db = client['herotag']
     collection = db['herotag_list']
+    print("Connected to MongoDB")
 except Exception as e:
     print(f"Error connecting to MongoDB: {e}")
     exit()
@@ -31,7 +33,7 @@ def get_herotags():
         # MongoDB query to find herotags by address
         query = {"address": {"$in": addresses}}
         results = collection.find(query, {"address": 1, "userName": 1})
-        
+
         # Create response with address and herotag
         response_data = [{"address": result["address"], "herotag": result["userName"]} for result in results]
 
@@ -40,18 +42,19 @@ def get_herotags():
     elif request.method == "POST":
         data = request.get_json()
         addresses = data.get("addresses", [])
-        
+
         if not addresses:
             return jsonify({"error": "The list of addresses is empty or missing."}), 400
 
         # MongoDB query to find herotags by address
         query = {"address": {"$in": addresses}}
         results = collection.find(query, {"address": 1, "userName": 1})
-        
+
         # Create response with address and herotag
         response_data = [{"address": result["address"], "herotag": result["userName"]} for result in results]
 
         return jsonify(response_data)
 
+# Run the Flask app
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
