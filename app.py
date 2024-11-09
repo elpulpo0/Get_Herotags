@@ -7,8 +7,8 @@ from dotenv import load_dotenv
 # Initialize Flask app
 app = Flask(__name__)
 
-# Configure CORS to allow multiple origins
-CORS(app, resources={r"/get_herotags": {"origins": ["http://localhost:5173", "https://pfp.kwak.lol"]}})
+# Configure CORS to allow multiple origins (check the correct domains)
+CORS(app, resources={r"/get_herotags": {"origins": ["http://localhost:5173", "https://pfp.kwak.lol"]}}, allow_headers=["Content-Type", "Authorization"])
 
 # Load environment variables
 load_dotenv()
