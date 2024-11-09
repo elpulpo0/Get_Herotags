@@ -1,3 +1,5 @@
 venv
 .env
 scrap.py
+doublons.py
+delete.py

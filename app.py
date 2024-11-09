@@ -1,10 +1,14 @@
 from flask import Flask, jsonify, request
 from pymongo import MongoClient
+from flask_cors import CORS
 import os
 from dotenv import load_dotenv
 
 # Initialize Flask app
 app = Flask(__name__)
+
+# Configure CORS to allow multiple origins
+CORS(app, resources={r"/get_herotags": {"origins": ["http://localhost:5173", "https://pfp.kwak.lol"]}})
 
 # Load environment variables
 load_dotenv()
